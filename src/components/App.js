@@ -124,7 +124,7 @@ function App() {
 			
 			<ImagePopup/>
 
-			<template className="card-template card-template_type_default">
+			{/* <template className="card-template card-template_type_default">
 					<div className="card">
 						<button className="card__trash-icon" type="button" alt="Удалить" ></button>
 						<img src='#' alt='#' className="card__image"/>
@@ -136,7 +136,7 @@ function App() {
 							</div>
 						</div>
 					</div>
-			</template>
+			</template> */}
 		</div>
 	)
 }
