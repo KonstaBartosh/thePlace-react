@@ -55,13 +55,14 @@ function App() {
 				name="profile" 
 				title="Редактировать профиль" 
 				isOpen={isEditProfilePopupOpen}
-				onClose={closeAllPopups}>
+				onClose={closeAllPopups}
+				buttonText="Сохранить">
 				<input  
 					name="name"
 					id="name-input"
 					className="popup__field form__input popup__field_type_profile-name"
 					type="text"
-					value=""
+					defaultValue=""
 					minLength="2" maxLength="40"
 					required
 				/>
@@ -71,7 +72,7 @@ function App() {
 					id="occupation-input"
 					className="popup__field form__input popup__field_type_profile-occupation"
 					type="text" 
-					value="" 
+					defaultValue="" 
 					minLength="2" maxLength="200"
 					required
 				/>
@@ -82,12 +83,13 @@ function App() {
 				name="add" 
 				title="Новое место" 
 				isOpen={isAddPlacePopupOpen}
-				onClose={closeAllPopups}>
+				onClose={closeAllPopups}
+				buttonText="Создать">
 				<input  
 					name="add__title"
 					id="title-input"
 					type="text" 
-					value="" 
+					defaultValue="" 
 					className="popup__field form__input" 
 					placeholder="Название"
 					minLength="2" maxLength="30" 
@@ -98,7 +100,7 @@ function App() {
 					name="add__link"
 					id="link-input"
 					type="url" 
-					value="" 
+					defaultValue="" 
 					className="popup__field form__input" 
 					placeholder="Ссылка на картинку"
 					required
@@ -110,12 +112,13 @@ function App() {
 				name="userpic" 
 				title="Обновить аватар" 
 				isOpen={isEditAvatarPopupOpen}
-				onClose={closeAllPopups}>
+				onClose={closeAllPopups}
+				buttonText="Обновить">
 				<input  
 					name="avatar"
 					id="avatar-input"
 					type="url" 
-					value="" 
+					defaultValue="" 
 					className="popup__field form__input" 
 					placeholder="Ссылка на картинку"
 					required
