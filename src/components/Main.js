@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { api } from "../utils/Api.js";
+import Card from "./Card.js";
 
-function Main({onEditProfile, onAddPlace, onEditAvatar}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
+	/** Стейт-переменные юзера и карточек для данных с сервера */
 	const [userName, setUserName] = useState('');
 	const [userDescription, setUserDescription] = useState('');
 	const [userAvatar, setUserAvatar] = useState('');
 	const [cards, setCards] = useState([]);
 	
+	/** Вызываем эффект с результатами промиса с сервера */
 	useEffect(() => {
 		Promise.all([api.getUserDataApi(), api.getInitialCardsApi()])
 		.then(([userData, cardsData]) => {
@@ -14,11 +17,9 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
 			setUserDescription(userData.about);
 			setUserAvatar(userData.avatar);
 			setCards(cardsData);
-			console.log(cardsData)
 		})
 		.catch(err => console.log(err))
 	}, []);
-
 
 	return(
 		<div className="main">
@@ -50,23 +51,19 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
 						onClick={onAddPlace}
 						></button>
 			</section>
-
+			
+			{/* <--- Здесь карточки ---> */}
 			<section className="cards">
 				{cards.map(card => (
-					<div className="card">
-					<button className="card__trash-icon" type="button" alt="Удалить" ></button>
-					<img src={card.link} alt='#' className="card__image"/>
-					<div className="card__header">
-						<h2 className="card__title">{card.name}</h2>
-						<div className="card__like-wrapper">
-							<button className="card__like" type="button" alt="Нравится"></button>
-							<p className="card__likes">{card.likes.length}</p>
-						</div>
-					</div>
-				</div>
+					<Card
+						card={card}
+						name={card.name}
+						link={card.link}
+						likes={card.likes}
+						onCardClick={onCardClick}
+					/>
 				))}
 			</section>
-			
 		</div>
 	)
 }

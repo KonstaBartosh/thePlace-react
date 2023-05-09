@@ -6,11 +6,18 @@ import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
 
 function App() {
-	/** Стейт-переменные */
+	/** Стейт-переменные для попапов */
 	const [isEditAvatarPopupOpen, setAvatarPopupOpen] = useState(false);
 	const [isEditProfilePopupOpen, setProfilePopupOpen] = useState(false);
 	const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
+	const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
+	const [selectedCard, setSelectedCard] = useState(false);
   
+	function handleCardClick(card) {
+		setSelectedCard(card);
+		setIsImagePopupOpen(true)
+	}
+
 	/** Открытие попапов */
 	function handleEditAvatarClick() {
 		setAvatarPopupOpen(true);
@@ -29,6 +36,7 @@ function App() {
 		setAvatarPopupOpen(false);
 		setProfilePopupOpen(false);
 		setAddPlacePopupOpen(false);
+		setIsImagePopupOpen(false);
 	}
 
   return (
@@ -38,6 +46,7 @@ function App() {
 				onEditAvatar={handleEditAvatarClick}
 				onEditProfile={handleEditProfileClick}
 				onAddPlace={handleAddPlaceClick}
+				onCardClick={handleCardClick}
 			/>
 			<Footer/>
 			{/* <--попапы--> */}
@@ -45,8 +54,7 @@ function App() {
 				name="profile" 
 				title="Редактировать профиль" 
 				isOpen={isEditProfilePopupOpen}
-				onClose={closeAllPopups}
-				>
+				onClose={closeAllPopups}>
 				<input  
 					name="name"
 					id="name-input"
@@ -73,8 +81,7 @@ function App() {
 				name="add" 
 				title="Новое место" 
 				isOpen={isAddPlacePopupOpen}
-				onClose={closeAllPopups}
-				>
+				onClose={closeAllPopups}>
 				<input  
 					name="add__title"
 					id="title-input"
@@ -102,8 +109,7 @@ function App() {
 				name="userpic" 
 				title="Обновить аватар" 
 				isOpen={isEditAvatarPopupOpen}
-				onClose={closeAllPopups}
-				>
+				onClose={closeAllPopups}>
 				<input  
 					name="avatar"
 					id="avatar-input"
@@ -122,21 +128,11 @@ function App() {
 				<p className="popup__title">Вы уверены?</p>
 			</PopupWithForm>
 			
-			<ImagePopup/>
-
-			{/* <template className="card-template card-template_type_default">
-					<div className="card">
-						<button className="card__trash-icon" type="button" alt="Удалить" ></button>
-						<img src='#' alt='#' className="card__image"/>
-						<div className="card__header">
-							<h2 className="card__title"></h2>
-							<div className="card__like-wrapper">
-								<button className="card__like" type="button" alt="Нравится" ></button>
-								<p className="card__likes">0</p>
-							</div>
-						</div>
-					</div>
-			</template> */}
+			<ImagePopup
+				card={selectedCard}
+				isOpen={isImagePopupOpen}
+				onClose={closeAllPopups}>
+			</ImagePopup>
 		</div>
 	)
 }
