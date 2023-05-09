@@ -11,11 +11,12 @@ function App() {
 	const [isEditProfilePopupOpen, setProfilePopupOpen] = useState(false);
 	const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
 	const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
-	const [selectedCard, setSelectedCard] = useState(false);
+
+	const [selectedCard, setSelectedCard] = useState({});
   
 	function handleCardClick(card) {
 		setSelectedCard(card);
-		setIsImagePopupOpen(true)
+		setIsImagePopupOpen(true);
 	}
 
 	/** Открытие попапов */
@@ -131,8 +132,8 @@ function App() {
 			<ImagePopup
 				card={selectedCard}
 				isOpen={isImagePopupOpen}
-				onClose={closeAllPopups}>
-			</ImagePopup>
+				onClose={closeAllPopups} 
+			/>
 		</div>
 	)
 }

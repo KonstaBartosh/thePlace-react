@@ -4,12 +4,12 @@ function PopupWithForm({name, title, children, isOpen, onClose}) {
 					<div className="popup__container overlay">
 							<button 
 								className="popup__close-button" 
-								aria-label="Закрыть" 
 								type="button"
 								onClick={onClose}
-								></button>
+								buttonText= "Закрыть"
+								/>
 							<p className="popup__title">{title}</p>
-							<form action="#" name={`form__${name}`} className="form" noValidate>
+							<form action="#" name={`form__${name}`} className="form">
 									{children}
 									<button type="submit" className="popup__submit-button popup__submit-button_type_profile">Сохранить</button>
 							</form>
