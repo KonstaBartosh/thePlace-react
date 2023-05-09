@@ -105,7 +105,7 @@ function App() {
 					placeholder="Ссылка на картинку"
 					required
 					/>
-					<span class="link-input-error form__error-message"></span>
+					<span className="link-input-error form__error-message"></span>
 			</PopupWithForm>
 
 			<PopupWithForm 
