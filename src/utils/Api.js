@@ -1,10 +1,10 @@
-class Api{
+class Api {
 	constructor(config) {
 		this._url = config.url
 		this._headers = config.headers;
 	}
 
-  	/**Проверить на ошибки */
+	/**Проверить на ошибки */
 	_checkResponse(res) {
 		if (res.ok) {
 			return res.json();
@@ -33,7 +33,7 @@ class Api{
 		return fetch(`${this._url}/users/me`, {
 			headers: this._headers,
 		}).then(this._checkResponse);
-	}	
+	}
 
 	changeUserDataApi(data) {
 		return fetch(`${this._url}/users/me`, {
@@ -63,25 +63,27 @@ class Api{
 		}).then(this._checkResponse);
 	}
 
-	addLikeToCardApi(cardId) {
-		return fetch(`${this._url}/cards/${cardId}/likes`, {
-			method: 'PUT',
-			headers: this._headers
-		}).then(this._checkResponse);
-	}
-
-	removeLikeFromCardApi(cardId) {
-		return fetch(`${this._url}/cards/${cardId}/likes`, {
-			method: 'DELETE',
-			headers: this._headers
-		}).then(this._checkResponse);
+	changeLikeCardStatus(cardId, isLiked) {
+		if (!isLiked) {
+			return fetch(`${this._url}/cards/${cardId}/likes`, {
+				method: 'DELETE',
+				headers: this._headers,
+			})
+				.then(this._checkResponse);
+		} else {
+			return fetch(`${this._url}/cards/${cardId}/likes`, {
+				method: 'PUT',
+				headers: this._headers,
+			})
+			.then(this._checkResponse);
+		}
 	}
 }
 
 export const api = new Api({
 	url: 'https://mesto.nomoreparties.co/v1/cohort-64',
 	headers: {
-			authorization: '3fea5f60-ca24-4403-9861-1d6a72c9cf2f',
-			'Content-Type': 'application/json'
+		authorization: '3fea5f60-ca24-4403-9861-1d6a72c9cf2f',
+		'Content-Type': 'application/json'
 	}
 });

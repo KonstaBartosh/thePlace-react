@@ -9,20 +9,35 @@ import { api } from "../utils/Api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function App() {
-	/** Стейт-переменные для попапов */
 	const [isEditAvatarPopupOpen, setAvatarPopupOpen] = useState(false);
 	const [isEditProfilePopupOpen, setProfilePopupOpen] = useState(false);
 	const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
 	const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
-
 	const [currentUser, setCurrentUser] = useState({});
-
+	const [cards, setCards] = useState([]);
 	const [selectedCard, setSelectedCard] = useState({});
 
+	/** Эффект с результатами промиса с сервера о пользователе и карточках */
 	useEffect(() => {
-		api.getUserDataApi()
-			.then(userData => setCurrentUser(userData))
-	});
+		Promise.all([api.getUserDataApi(), api.getInitialCardsApi()])
+			.then(([userData, cardsData]) => {
+				setCurrentUser(userData);
+				setCards(cardsData);
+				console.log(cardsData);
+			})
+			.catch((err) => console.log(`Возникла ошибка ${err}`))
+	}, []);
+
+
+	function handleCardLike(card) {
+		// Проверяем, есть ли уже лайк на этой карточке
+		const isLiked = card.likes.some((like) => like._id === currentUser._id);
+		// Отправляем запрос в API и получаем обновлённые данные карточки
+		api.changeLikeCardStatus(card._id, !isLiked)
+			.then((newCard) => {
+				setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
+			});
+	}
 
 	function handleCardClick(card) {
 		setSelectedCard(card);
@@ -59,9 +74,10 @@ function App() {
 					onEditProfile={handleEditProfileClick}
 					onAddPlace={handleAddPlaceClick}
 					onCardClick={handleCardClick}
+					onCardLike={handleCardLike}
+					cards={cards}
 				/>
 				<Footer />
-				{/* <--попапы--> */}
 				<PopupWithForm
 					name="profile"
 					title="Редактировать профиль"
@@ -142,8 +158,8 @@ function App() {
 				<ImagePopup
 					card={selectedCard}
 					isOpen={isImagePopupOpen}
-					onClose={closeAllPopups}
-				/>
+					onClose={closeAllPopups}>
+				</ImagePopup>
 			</CurrentUserContext.Provider>
 		</div>
 	)
