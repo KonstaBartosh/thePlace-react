@@ -3,7 +3,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 import Card from "./Card.js";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, cards }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete, cards }) {
 	const currentUser = useContext(CurrentUserContext); /** Подписка на контекст */
 
 	return (
@@ -48,6 +48,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike
 						likes={card.likes}
 						onCardClick={onCardClick}
 						onCardLike={onCardLike}
+						onCardDelete={onCardDelete}
 					/>
 				))}
 			</section>

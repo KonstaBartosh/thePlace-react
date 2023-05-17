@@ -31,12 +31,19 @@ function App() {
 
 	function handleCardLike(card) {
 		// Проверяем, есть ли уже лайк на этой карточке
-		const isLiked = card.likes.some((like) => like._id === currentUser._id);
+		const isCurrentUserLiked = card.likes.some((like) => like._id === currentUser._id);
 		// Отправляем запрос в API и получаем обновлённые данные карточки
-		api.changeLikeCardStatus(card._id, !isLiked)
+		api.changeLikeCardStatus(card._id, !isCurrentUserLiked)
 			.then((newCard) => {
 				setCards((cards) => cards.map((item) => item._id === card._id ? newCard : item));
 			});
+	}
+
+	function handleCardDelete(card) {
+		api.deleteCardApi(card._id)
+			.then(() => {
+				setCards((cards) => cards.filter((item) => item._id !== card._id));
+			})
 	}
 
 	function handleCardClick(card) {
@@ -75,6 +82,7 @@ function App() {
 					onAddPlace={handleAddPlaceClick}
 					onCardClick={handleCardClick}
 					onCardLike={handleCardLike}
+					onCardDelete={handleCardDelete}
 					cards={cards}
 				/>
 				<Footer />
