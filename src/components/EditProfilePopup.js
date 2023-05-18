@@ -3,12 +3,15 @@ import PopupWithForm from "./PopupWithForm.js"
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
-	const [name, setName] = useState('');
-	const [description, setDescription] = useState('');
-
-	// Подписка на контекст
+	/** Подписка на контекст */
 	const currentUser = useContext(CurrentUserContext);
 
+	const [name, setName] = useState('');
+	const [description, setDescription] = useState('');
+	const handleNameChange = (evt) => setName(evt.target.value);
+	const handleAboutChange = (evt) => setDescription(evt.target.value);
+	
+	/** С помощью эффекта отображаем в инпутах данные юзера с сервера */
 	useEffect(() => {
 		setName(currentUser.name);
 		setDescription(currentUser.about);
@@ -16,19 +19,11 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
 
 	function handleSubmit(evt) {
 		evt.preventDefault();
-		// Передаём значения управляемых компонентов во внешний обработчик
+		/** Передаём значения управляемых компонентов во внешний обработчик */
 		onUpdateUser({
-			name,
-			about: description,
+			name: name,
+			about: description
 		});
-	}
-
-	function handleNameChange(evt) {
-		setName(evt.target.value);
-	}
-
-	function handleAboutChange(evt) {
-		setDescription(evt.target.value);
 	}
 
 	return (
@@ -40,25 +35,23 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
 			onSubmit={handleSubmit}
 			buttonText="Сохранить">
 			<input
-				value={name}
+				value={name ?? ''}
 				onChange={handleNameChange}
 				name="name"
 				id="name-input"
 				className="popup__field form__input popup__field_type_profile-name"
 				type="text"
-				defaultValue=""
 				minLength="2" maxLength="40"
 				required
 			/>
 			<span className="name-input-error form__error-message"></span>
 			<input
-				value={description}
+				value={description ?? ''}
 				onChange={handleAboutChange}
 				name="about"
 				id="occupation-input"
 				className="popup__field form__input popup__field_type_profile-occupation"
 				type="text"
-				defaultValue=""
 				minLength="2" maxLength="200"
 				required
 			/>

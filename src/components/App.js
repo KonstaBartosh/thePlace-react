@@ -8,6 +8,7 @@ import ImagePopup from "./ImagePopup.js";
 import { api } from "../utils/Api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
+import EditAvatarPopup from "./EditAvatarPopup.js";
 
 function App() {
 	const [isEditAvatarPopupOpen, setAvatarPopupOpen] = useState(false);
@@ -28,13 +29,26 @@ function App() {
 			.catch((err) => console.log(`Возникла ошибка ${err}`))
 	}, []);
 
-	function handleUpdateUser(value) {
-		api.changeUserDataApi(value)
-			.then((res) => {
-				setCurrentUser(res)
+
+	function handleUpdateAvatar(data) {
+		api.changeUserAvatarApi(data)
+			.then((userData) => {
+				setCurrentUser(userData);
 				closeAllPopups();
-			});
+			})
+			.catch((err) => console.log(`Возникла ошибка ${err}`))
 	}
+
+
+	function handleUpdateUser(data) {
+		api.changeUserDataApi(data)
+			.then((userData) => {
+				setCurrentUser(userData);
+				closeAllPopups();
+			})
+			.catch((err) => console.log(`Возникла ошибка ${err}`))
+	}
+
 
 	function handleCardLike(card) {
 		// Проверяем, есть ли уже лайк на этой карточке
@@ -46,6 +60,7 @@ function App() {
 			});
 	}
 
+
 	function handleCardDelete(card) {
 		api.deleteCardApi(card._id)
 			.then(() => {
@@ -53,10 +68,12 @@ function App() {
 			})
 	}
 
+
 	function handleCardClick(card) {
 		setSelectedCard(card);
 		setIsImagePopupOpen(true);
 	}
+
 
 	/** Открытие попапов */
 	function handleEditAvatarClick() {
@@ -93,6 +110,13 @@ function App() {
 					cards={cards}
 				/>
 				<Footer />
+
+				<EditAvatarPopup
+					isOpen={isEditAvatarPopupOpen}
+					onClose={closeAllPopups}
+					onUpdateAvatar={handleUpdateAvatar}
+				/>
+
 				<EditProfilePopup
 					isOpen={isEditProfilePopupOpen}
 					onClose={closeAllPopups}
@@ -126,24 +150,6 @@ function App() {
 						required
 					/>
 					<span className="link-input-error form__error-message"></span>
-				</PopupWithForm>
-
-				<PopupWithForm
-					name="userpic"
-					title="Обновить аватар"
-					isOpen={isEditAvatarPopupOpen}
-					onClose={closeAllPopups}
-					buttonText="Обновить">
-					<input
-						name="avatar"
-						id="avatar-input"
-						type="url"
-						defaultValue=""
-						className="popup__field form__input"
-						placeholder="Ссылка на картинку"
-						required
-					/>
-					<span className="avatar-input-error form__error-message"></span>
 				</PopupWithForm>
 
 				<PopupWithForm
