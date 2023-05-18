@@ -7,6 +7,7 @@ import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
 import { api } from "../utils/Api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+import EditProfilePopup from "./EditProfilePopup.js";
 
 function App() {
 	const [isEditAvatarPopupOpen, setAvatarPopupOpen] = useState(false);
@@ -23,7 +24,6 @@ function App() {
 			.then(([userData, cardsData]) => {
 				setCurrentUser(userData);
 				setCards(cardsData);
-				console.log(cardsData);
 			})
 			.catch((err) => console.log(`Возникла ошибка ${err}`))
 	}, []);
@@ -86,33 +86,8 @@ function App() {
 					cards={cards}
 				/>
 				<Footer />
-				<PopupWithForm
-					name="profile"
-					title="Редактировать профиль"
-					isOpen={isEditProfilePopupOpen}
-					onClose={closeAllPopups}
-					buttonText="Сохранить">
-					<input
-						name="name"
-						id="name-input"
-						className="popup__field form__input popup__field_type_profile-name"
-						type="text"
-						defaultValue=""
-						minLength="2" maxLength="40"
-						required
-					/>
-					<span className="name-input-error form__error-message"></span>
-					<input
-						name="about"
-						id="occupation-input"
-						className="popup__field form__input popup__field_type_profile-occupation"
-						type="text"
-						defaultValue=""
-						minLength="2" maxLength="200"
-						required
-					/>
-					<span className="occupation-input-error form__error-message"></span>
-				</PopupWithForm>
+				<EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+
 				<PopupWithForm
 					name="add"
 					title="Новое место"
@@ -141,6 +116,7 @@ function App() {
 					/>
 					<span className="link-input-error form__error-message"></span>
 				</PopupWithForm>
+
 				<PopupWithForm
 					name="userpic"
 					title="Обновить аватар"
@@ -158,16 +134,19 @@ function App() {
 					/>
 					<span className="avatar-input-error form__error-message"></span>
 				</PopupWithForm>
+
 				<PopupWithForm
 					name="delete-card"
 					title="Вы уверены?">
 					<p className="popup__title">Вы уверены?</p>
 				</PopupWithForm>
+
 				<ImagePopup
 					card={selectedCard}
 					isOpen={isImagePopupOpen}
 					onClose={closeAllPopups}>
 				</ImagePopup>
+				
 			</CurrentUserContext.Provider>
 		</div>
 	)
