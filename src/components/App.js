@@ -9,6 +9,7 @@ import { api } from "../utils/Api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
+import AddPlacePopup from "./AddPlacePopup.js";
 
 function App() {
 	const [isEditAvatarPopupOpen, setAvatarPopupOpen] = useState(false);
@@ -100,15 +101,20 @@ function App() {
 		<div className="page">
 			<CurrentUserContext.Provider value={currentUser}>
 				<Header />
+				
 				<Main
 					onEditAvatar={handleEditAvatarClick}
 					onEditProfile={handleEditProfileClick}
 					onAddPlace={handleAddPlaceClick}
+				/>
+
+				<AddPlacePopup
 					onCardClick={handleCardClick}
 					onCardLike={handleCardLike}
 					onCardDelete={handleCardDelete}
 					cards={cards}
 				/>
+
 				<Footer />
 
 				<EditAvatarPopup
