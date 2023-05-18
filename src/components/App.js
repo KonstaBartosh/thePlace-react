@@ -28,6 +28,13 @@ function App() {
 			.catch((err) => console.log(`Возникла ошибка ${err}`))
 	}, []);
 
+	function handleUpdateUser(value) {
+		api.changeUserDataApi(value)
+			.then((res) => {
+				setCurrentUser(res)
+				closeAllPopups();
+			});
+	}
 
 	function handleCardLike(card) {
 		// Проверяем, есть ли уже лайк на этой карточке
@@ -86,7 +93,11 @@ function App() {
 					cards={cards}
 				/>
 				<Footer />
-				<EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+				<EditProfilePopup
+					isOpen={isEditProfilePopupOpen}
+					onClose={closeAllPopups}
+					onUpdateUser={handleUpdateUser}
+				/>
 
 				<PopupWithForm
 					name="add"
@@ -146,7 +157,7 @@ function App() {
 					isOpen={isImagePopupOpen}
 					onClose={closeAllPopups}>
 				</ImagePopup>
-				
+
 			</CurrentUserContext.Provider>
 		</div>
 	)
