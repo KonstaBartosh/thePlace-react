@@ -3,7 +3,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 import Card from "./Card.js";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete, cards }) {
 	const currentUser = useContext(CurrentUserContext); /** Подписка на контекст */
 
 	return (
@@ -36,8 +36,9 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
 					onClick={onAddPlace}
 				></button>
 			</section>
+
 			{/* <--- Здесь карточки ---> */}
-			{/* <section className="cards">
+			<section className="cards">
 				{cards.map(card => (
 					<Card
 						key={card._id}
@@ -50,7 +51,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
 						onCardDelete={onCardDelete}
 					/>
 				))}
-			</section> */}
+			</section>
 		</main>
 	)
 }

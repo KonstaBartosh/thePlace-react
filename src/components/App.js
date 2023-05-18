@@ -101,20 +101,15 @@ function App() {
 		<div className="page">
 			<CurrentUserContext.Provider value={currentUser}>
 				<Header />
-				
 				<Main
 					onEditAvatar={handleEditAvatarClick}
 					onEditProfile={handleEditProfileClick}
 					onAddPlace={handleAddPlaceClick}
-				/>
-
-				<AddPlacePopup
 					onCardClick={handleCardClick}
 					onCardLike={handleCardLike}
 					onCardDelete={handleCardDelete}
 					cards={cards}
 				/>
-
 				<Footer />
 
 				<EditAvatarPopup
@@ -129,34 +124,10 @@ function App() {
 					onUpdateUser={handleUpdateUser}
 				/>
 
-				<PopupWithForm
-					name="add"
-					title="Новое место"
+				<AddPlacePopup 
 					isOpen={isAddPlacePopupOpen}
 					onClose={closeAllPopups}
-					buttonText="Создать">
-					<input
-						name="add__title"
-						id="title-input"
-						type="text"
-						defaultValue=""
-						className="popup__field form__input"
-						placeholder="Название"
-						minLength="2" maxLength="30"
-						required
-					/>
-					<span className="title-input-error form__error-message"></span>
-					<input
-						name="add__link"
-						id="link-input"
-						type="url"
-						defaultValue=""
-						className="popup__field form__input"
-						placeholder="Ссылка на картинку"
-						required
-					/>
-					<span className="link-input-error form__error-message"></span>
-				</PopupWithForm>
+				/>
 
 				<PopupWithForm
 					name="delete-card"

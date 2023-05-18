@@ -1,22 +1,37 @@
-import Card from "./Card";
+import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({cards, onCardClick, onCardLike, onCardDelete}) {
+function AddPlacePopup({isOpen, onClose}) {
+
 	return (
-		<section className="cards">
-			{cards.map(card => (
-				<Card
-					key={card._id}
-					card={card}
-					name={card.name}
-					link={card.link}
-					likes={card.likes}
-					onCardClick={onCardClick}
-					onCardLike={onCardLike}
-					onCardDelete={onCardDelete}
-				/>
-			))}
-		</section>
+		<PopupWithForm
+			name="add"
+			title="Новое место"
+			isOpen={isOpen}
+			onClose={onClose}
+			buttonText="Создать">
+			<input
+				name="add__title"
+				id="title-input"
+				type="text"
+				defaultValue=""
+				className="popup__field form__input"
+				placeholder="Название"
+				minLength="2" maxLength="30"
+				required
+			/>
+			<span className="title-input-error form__error-message"></span>
+			<input
+				name="add__link"
+				id="link-input"
+				type="url"
+				defaultValue=""
+				className="popup__field form__input"
+				placeholder="Ссылка на картинку"
+				required
+			/>
+			<span className="link-input-error form__error-message"></span>
+		</PopupWithForm>
 	)
 }
-
+	
 export default AddPlacePopup;
