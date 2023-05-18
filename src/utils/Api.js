@@ -23,10 +23,11 @@ class Api {
 			method: 'POST',
 			headers: this._headers,
 			body: JSON.stringify({
-				name: data.add__title,
-				link: data.add__link
+				name: data.name,
+				link: data.link
 			})
-		}).then(this._checkResponse)
+		})
+			.then(this._checkResponse)
 	}
 
 	getUserDataApi() {
@@ -75,7 +76,7 @@ class Api {
 				method: 'PUT',
 				headers: this._headers,
 			})
-			.then(this._checkResponse);
+				.then(this._checkResponse);
 		}
 	}
 }

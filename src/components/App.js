@@ -27,7 +27,7 @@ function App() {
 				setCurrentUser(userData);
 				setCards(cardsData);
 			})
-			.catch((err) => console.log(`Возникла ошибка ${err}`))
+			.catch((err) => alert(`Возникла ошибка ${err}`))
 	}, []);
 
 
@@ -37,7 +37,7 @@ function App() {
 				setCurrentUser(userData);
 				closeAllPopups();
 			})
-			.catch((err) => console.log(`Возникла ошибка ${err}`))
+			.catch((err) => alert(`Возникла ошибка ${err}`))
 	}
 
 
@@ -47,7 +47,16 @@ function App() {
 				setCurrentUser(userData);
 				closeAllPopups();
 			})
-			.catch((err) => console.log(`Возникла ошибка ${err}`))
+			.catch((err) => alert(`Возникла ошибка ${err}`))
+	}
+
+	function handleAddPlaceSubmit(card) {
+		api.addCardApi(card)
+			.then((newCard) => {
+				setCards([newCard, ...cards]);
+				closeAllPopups();
+			})
+			.catch((err) => alert(`Возникла ошибка ${err}`))
 	}
 
 
@@ -58,7 +67,8 @@ function App() {
 		api.changeLikeCardStatus(card._id, !isCurrentUserLiked)
 			.then((newCard) => {
 				setCards((cards) => cards.map((item) => item._id === card._id ? newCard : item));
-			});
+			})
+			.catch((err) => alert(`Возникла ошибка ${err}`))
 	}
 
 
@@ -67,6 +77,7 @@ function App() {
 			.then(() => {
 				setCards((cards) => cards.filter((item) => item._id !== card._id));
 			})
+			.catch((err) => alert(`Возникла ошибка ${err}`))
 	}
 
 
@@ -127,6 +138,7 @@ function App() {
 				<AddPlacePopup 
 					isOpen={isAddPlacePopupOpen}
 					onClose={closeAllPopups}
+					onAddPlace={handleAddPlaceSubmit}
 				/>
 
 				<PopupWithForm
