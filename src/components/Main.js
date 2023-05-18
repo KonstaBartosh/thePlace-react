@@ -51,9 +51,6 @@ function Main({
 					<Card
 						key={card._id}
 						card={card}
-						name={card.name}
-						link={card.link}
-						likes={card.likes}
 						onCardClick={onCardClick}
 						onCardLike={onCardLike}
 						onCardDelete={onCardDelete}
