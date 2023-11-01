@@ -1,6 +1,13 @@
 function PopupWithForm({name, title, children, isOpen, onClose, onSubmit, buttonText}) {
+	//* Закрытие попапов по клику на оверлей*/
+	function handleOverlayClick(evt) {
+		if (evt.target === evt.currentTarget) {
+			onClose();
+		}
+	}
+
 	return(
-			<div className={`popup ${isOpen ? "popup_opened" : ""} popup_type_${name}`} >
+			<div className={`popup ${isOpen && "popup_opened"} popup_type_${name}`} onClick={handleOverlayClick} >
 					<div className="popup__container overlay">
 							<button 
 								className="popup__close-button" 

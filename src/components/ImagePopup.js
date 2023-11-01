@@ -1,7 +1,14 @@
 function ImagePopup({card, isOpen, onClose}) {
+	//* Закрытие попапов по клику на оверлей*/
+	function handleOverlayClick(evt) {
+		if (evt.target === evt.currentTarget) {
+			onClose();
+		}
+	}
+
 	return(
-		<div className={`popup popup_type_image ${isOpen ? "popup_opened" : ""}`}>
-			<figure className="popup__container-image overlay">
+		<div className={`popup popup_type_image ${isOpen && "popup_opened"}`} onClick={handleOverlayClick}>
+			<figure className="popup__container-image">
 					<button 
 						className="popup__close-button" 
 						aria-label="Закрыть" 

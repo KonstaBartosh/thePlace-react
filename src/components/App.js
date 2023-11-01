@@ -150,7 +150,8 @@ function App() {
 				<ImagePopup
 					card={selectedCard}
 					isOpen={isImagePopupOpen}
-					onClose={closeAllPopups}>
+					onClose={closeAllPopups}
+					>
 				</ImagePopup>
 
 			</CurrentUserContext.Provider>
