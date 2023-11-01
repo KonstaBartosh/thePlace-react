@@ -1,6 +1,10 @@
 .header__logo {
-    max-width: 142px;
+    /* max-width: 142px; */
     padding-bottom: 40px;
+    color: white;
+    font-size: 34px;
+    line-height: 40px;
+    font-style: 400;
 }
 
 @media screen and (max-width: 1023px) {
@@ -11,7 +15,6 @@
 
 @media screen and (max-width: 424px) {
     .header__logo {
-        width: 104px;
         padding-bottom: 31px;
     }
 }

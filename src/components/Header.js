@@ -1,9 +1,8 @@
-import logo from '../images/logo.png';
 
 function Header() {
 	return(
 		<header className="header header_line">
-			<img src={logo} alt="Логотип" className="header__logo"/>
+			<h1 className="header__logo">The Place</h1>
 		</header>
 	)
 }
