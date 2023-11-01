@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/thePlace-react/static/css/main.bc38955f.css",
-    "main.js": "/thePlace-react/static/js/main.e24ea7f6.js",
+    "main.js": "/thePlace-react/static/js/main.5856eccf.js",
     "static/js/787.7e45d085.chunk.js": "/thePlace-react/static/js/787.7e45d085.chunk.js",
     "static/media/Inter-Bold.woff?v=3.19": "/thePlace-react/static/media/Inter-Bold.93c1301bd9f486c573b3.woff",
     "static/media/Inter-Black.woff?v=3.19": "/thePlace-react/static/media/Inter-Black.c6938660eec019fefd68.woff",
@@ -20,11 +20,11 @@
     "static/media/pencil-button.svg": "/thePlace-react/static/media/pencil-button.a086f758840ae814ecde.svg",
     "static/media/close-icon.svg": "/thePlace-react/static/media/close-icon.2ceb783afbab75916ddc.svg",
     "main.bc38955f.css.map": "/thePlace-react/static/css/main.bc38955f.css.map",
-    "main.e24ea7f6.js.map": "/thePlace-react/static/js/main.e24ea7f6.js.map",
+    "main.5856eccf.js.map": "/thePlace-react/static/js/main.5856eccf.js.map",
     "787.7e45d085.chunk.js.map": "/thePlace-react/static/js/787.7e45d085.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bc38955f.css",
-    "static/js/main.e24ea7f6.js"
+    "static/js/main.5856eccf.js"
   ]
 }
